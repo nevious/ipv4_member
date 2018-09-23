@@ -27,6 +27,7 @@ class IPv4Member(object):
 				)
 		else:
 			self.NETMASK = mask
+			self.NETWORK = network
 
 		self.write_log()
 		self.translate_ip()
