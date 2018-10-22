@@ -6,6 +6,7 @@ import struct
 import sys
 import logging
 
+
 class IPv4Member(object):
 	def __init__(self, ip, network, mask=None, log=None):
 		self.IP = ip
@@ -71,17 +72,16 @@ class IPv4Member(object):
 			self.BIN_NETWORK = struct.pack('!L', self.INT_NETWORK)
 			self.NETWORK = socket.inet_ntoa(self.BIN_NETWORK)
 
-
 	def is_member(self):
 		self.IS_MEMBER = True
 		if self.IP_INT_NETWORK_ADDR - self.INT_NETWORK != 0:
 			self.IS_MEMBER = False
 
 		self.write_log()
-	
+
 	def mask_from_cidr(self):
 		prefix_bits = 32 - self.CIDR
-		x = (1<<32) - (1<<prefix_bits) # 255.255.255.255 - hosts
+		x = (1 << 32) - (1 << prefix_bits)  # 255.255.255.255 - hosts
 		return socket.inet_ntoa(struct.pack('!L', x))
 
 	def write_log(self):
@@ -89,6 +89,7 @@ class IPv4Member(object):
 			['%s: {%s}' % (i, i) for i in self._gen_custom_attr()]
 		)
 		self.log.info(string.format(**self.__dict__))
+
 
 if __name__ == '__main__':
 	try:
